@@ -1,0 +1,15 @@
+﻿@using  Sitecore.Mvc
+@using  Utilities
+<section class="hero is-medium is-black" style="background-image: 
+         url(@Html.Sitecore().MediaUrl(Templates.ProductBanner.Fields.ProductBannerImage))">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                @Html.Sitecore().Field(Templates.ProductBanner.Fields.ProductBannerCaption)
+            </h1>
+            <h2 class="subtitle">
+                @Html.Sitecore().Field(Templates.ProductBanner.Fields.ProductBannnerText)
+            </h2>
+        </div>
+    </div>
+</section>

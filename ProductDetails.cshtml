@@ -1,0 +1,24 @@
+﻿@using Utilities
+@using Sitecore.Mvc
+<div class="container">
+    <section class="hero is-small product-detail-hero">
+        <div class="hero-body">
+            <h1 class="title">
+               @Html.Sitecore().Field(Templates.ProductDetails.ProductDetailTopFields.ProductDetailsTitle)
+            </h1>
+            <h2 class="subtitle is-one-quarter">
+                @Html.Sitecore().Field(Templates.ProductDetails.ProductDetailTopFields.ProductSubTitle)
+            </h2>
+        </div>
+    </section>
+</div>
+<section class="product-detail columns is-centered is-vcentered">
+    <div class="product-details column is-narrow has-text-centered-mobile">
+        <h5> @Html.Sitecore().Field(Templates.ProductDetails.ProductDetailTopFields.ProductPrice)</h5>
+        <p class="price">$ @Html.Sitecore().Field(Templates.ProductDetails.ProductDetailTopFields.ProductPriceValue)</p>
+        @Html.Sitecore().Field(Templates.ProductDetails.ProductDetailTopFields.ProductDescription)
+    </div>
+    <div class="product-image column is-3">
+        <img src=" @Html.Sitecore().MediaUrl(Templates.ProductDetails.ProductDetailTopFields.ProductDetailsImage)" alt="Product 1" />
+    </div>
+</section>

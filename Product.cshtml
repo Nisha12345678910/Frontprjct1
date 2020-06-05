@@ -1,0 +1,18 @@
+﻿@using Sitecore.Mvc
+@using Utilities
+<div class="product-list-columns columns is-multiline">
+    <a href="/" class="column product-list-column is-4-desktop is-6-tablet">
+        <div class="card">
+            <div class="card-image">
+                <figure style="background-image: url(@Html.Sitecore().MediaUrl(Templates.ProductCallout.Fields.ProductCalloutImage))"></figure>
+            </div>
+            <div class="card-content">
+                <div class="content">
+                    <h4>@Html.Sitecore().Field(Templates.ProductCallout.Fields.ProductCalloutTitle)</h4>
+                    <p>@Html.Sitecore().Field(Templates.ProductCallout.Fields.ProductCalloutSubTutle)</p>
+                </div>
+            </div>
+        </div>
+    </a>
+
+</div>
