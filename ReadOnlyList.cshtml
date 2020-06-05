@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MVCUdemy1.Models.Customer>
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+}
+
+ 
+<table class="table" id="cust">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("MemberShip")
+            </th>
+
+            <th>
+                @Html.DisplayName("Action")
+            </th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+          var table=  $("#cust").DataTable({
+                ajax: {
+                    url: '/api/customers/',
+                    dataSrc: "",
+
+                },
+                columns: [
+                    {
+                        data: 'Name' 
+                    },
+                    {
+                        data: 'MembershipType.MemberShipTypeName'
+
+                    }
+
+                   
+                ]
+            });
+
+         });
+    </script>
+}

@@ -1,0 +1,83 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New  Rental Form</h2>
+
+<form id="newrental">
+    <div class="form-group">
+        <label>Cutomer</label>
+        <div class="tt-container">
+            <input id="cust" name="customer" required type="text" data-rule-validataCustomer="true" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+
+        </div>
+    </div>
+    <ul id="cstmr" class="list-group"></ul>
+    <button class="btn btn-primary">Submit</button>
+</form>
+
+ @section  scripts{
+    <script>
+        $(document).ready(function () {
+            var vm = {
+                Id: []
+            };
+            var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/customers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#cust').typeahead({
+                minLenght: 3,
+                highlight: true
+            },
+                {
+                    name: 'customers',
+                    display: 'Name',
+                    source: customers
+                }).on("typeahead:select", function (e, customer) {
+
+                    $("#cstmr").append("<li class='list-group-item'>" + customer.Name + "</li>");
+                    $("#cstmr").typeahead("val", "");
+                    vm.Id.push(customer.Id);
+
+                });
+            $.validator.addMethod("validataCustomer", function () {
+                return vm.Id && vm.Id != 0;
+            },"Please select the valid customer");
+           var valdtr= $("#newrental").validate({
+                submitHandler: function () {
+                    //e.preventDefault();
+                    $.ajax({
+                        url: '/api/newRental',
+                        method: 'post',
+                        data: vm
+                    }).done(function (result) {
+                        console.log("done" + result);
+                        toastr.success("Rental successfully recorded");
+                        $("#cust").typeahead("val", "");
+                        $("#cstmr").empty();
+                        vm = {
+                            Id: []
+                        };
+                        valdtr.resetForm();
+                    }).fail(function (err) {
+                        console.log(err);
+                        toastr.error("Fail to  recorded");
+                    });
+                    return false;
+                }
+            });
+
+        });
+    </script>
+}

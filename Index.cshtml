@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MVCUdemy1.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="cust">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("MemberShip")
+            </th>
+
+            <th>
+                @Html.DisplayName("Action")
+            </th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+          var table=  $("#cust").DataTable({
+                ajax: {
+                    url: '/api/customers/',
+                    dataSrc: "",
+                   
+                },
+                columns: [
+                    {
+                        data: 'Name',
+                        render: function (data, type, customer) {
+                            return ('<a href="/customer/edit"' + customer.Id + '>' + customer.Name + '</a>')
+                        }
+                         
+                    },
+                    {
+                        data: 'MembershipType.MemberShipTypeName' 
+
+                    },
+                     
+                    {
+                        data: 'Id',
+                        render: function (data) {
+                            return "<button class='btn-link js-delete'data-customer-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+           
+            $("#cust").on("click",".js-delete",function () {
+                
+                var btn = $(this);
+               
+                bootbox.confirm("Are you sure you  want to delete?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: 'api/customers/' + btn.attr("data-customer-id"),
+                            method: "delete",
+                            success: function () {
+                              table.row(btn.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+
+            });
+        });
+    </script>
+}
