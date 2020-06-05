@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Utilities.Templates.Callout.Fields>
+@using  Sitecore.Mvc   
+@using Utilities
+<div class="container">
+    <div class="columns">
+        @foreach (var item in Model)
+        {
+            <a href="@item.CalloutLink" class="column promo-column">
+                <div class="card">
+                    <div class="card-image">
+                        <figure style="background-image: url( @Html.Sitecore().MediaUrl(item.CalloutImage)"></figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <h4>@item.CalloutTitle </h4>
+                            <p>@item.CalloutSubtitle</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+
+    </div>
+</div>
+
+

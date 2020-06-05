@@ -1,0 +1,20 @@
+﻿@model IEnumerable<TrainingWebApplication.Models.CommonModel.Product>
+ 
+<div class="container">
+     
+    <div class="product-list-columns columns is-multiline">
+
+        @foreach (var item in Model)
+        {
+            <a href="@item.ProductPageLink" class="column product-list-column is-4-desktop is-6-tablet">
+                <div class="card">                    
+                    <div class="card-content">
+                        <div class="content">
+                            <h4>@item.ProductPageTitle</h4>                         
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>

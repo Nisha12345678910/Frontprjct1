@@ -1,0 +1,15 @@
+﻿@model IEnumerable<TrainingWebApplication.Models.CommonModel.PageItem>
+<div class="container">
+    @foreach (var item in Model)
+    {
+
+
+        <a href="@Html.DisplayFor(model => item.PageLink)" class="column">
+
+            <h2 class="title"> @Html.DisplayFor(model => item.PageTitle)</h2>
+
+        </a>
+
+
+    }
+</div>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<TrainingWebApplication.Models.CommonModel.CalloutSection>
+@using Sitecore.Mvc
+<div class="container">
+     <h2 class="title">@Html.Sitecore().Field("SectionHeaderTitle")</h2>
+</div>
+<div class="container">
+    <div class="columns">
+        @foreach (var item in Model)
+        {
+            <a href="@item.CalloutLink" class="column promo-column">
+                <div class="card">
+                    <div class="card-image">
+                         <figure style="background-image: url(images/promo-card-2.jpg)"></figure>
+                    </div>
+                    <div class="card-content">
+                         <div class="content">
+                            <h4>@item.CalloutTitle</h4>
+                            <p>@item.CalloutSubtitle</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+
+    </div>
+</div>
+
+

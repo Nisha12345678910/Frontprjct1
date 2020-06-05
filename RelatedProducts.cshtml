@@ -1,0 +1,26 @@
+﻿@model IEnumerable<TrainingWebApplication.Models.CommonModel.ProductCallout>
+@using Sitecore.Mvc
+@using Utilities
+<div class="container">
+    <h3 class="title">@Html.Sitecore().Field(Templates.ProductDetails.RelatedProductCallout.RelatedProductTitle)</h3>
+    <div class="product-list-columns columns is-multiline">
+
+        @foreach (var item in Model)
+        {
+
+           <a href="@item.ProductLink" class="column product-list-column is-4-desktop is-6-tablet">
+                <div class="card">
+                    <div class="card-image">
+                        <figure style="background-image: url(@item.ProductImage)"></figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <h4>@item.ProductTitle</h4>
+                            <p>@item.ProductSubTitle</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>
